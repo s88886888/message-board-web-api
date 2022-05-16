@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.ArticleMapper">
+
+
+    <insert id="AddArticle">
+
+
+        insert into article(articlename,
+                            time,
+                            author,
+                            authorid,
+                            text,
+                            Image,
+                            likecount) value (
+        articlenam=#{articlenam},
+            time =#{time},
+            author=#{author},
+            authorid=#{authorid},
+            text=#{text},
+            Image=#{image},
+            likecount=#{likecount}
+            )
+
+
+    </insert>
+    <update id="updateArticle">
+        update artcle set articlenam=#{articlenam},
+        time=#{time},
+        author=#{author},
+        authorid=#{authorid},
+        text=#{text},
+        Image=#{image},
+        likecount=#{likecount}
+        <where>id=#{id}</where>
+
+    </update>
+    <delete id="delectByid">
+        delete form artcle
+        <where>id=#{id}</where>
+    </delete>
+    <select id="selectALL" resultType="model.Article">
+        select *
+        from article
+    </select>
+    <select id="selectByid" resultType="model.Article">
+        select * from artcle
+        <where>id=#{id}</where>
+    </select>
+    <select id="SelectarticlenameOrauthor" resultType="model.Article">
+        select * form artcle
+        <if test="author =='' ||author==null">
+            and articlename like "%" #{articlename} "%";
+        </if>
+        <if test="articlename =='' || articlename==null">
+            and author like "%" #{author} "%";
+        </if>
+        name like "%" #{author} "%" and phone like "%" #{articlename} "%";
+    </select>
+
+
+</mapper>

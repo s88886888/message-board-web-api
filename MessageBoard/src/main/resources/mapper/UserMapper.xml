@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.UserMapper">
+
+    <insert id="AddUser">
+        insert INTO user (name,
+                             phone,
+                             password,
+                             email)
+        values (#{name},
+                #{phone},
+                #{password},
+                #{email})
+
+    </insert>
+
+    <update id="updateUser">
+
+        update user set name =#{name},
+        email=#{email},
+        password=#{password},
+        <where>id=#{id}</where>
+
+    </update>
+
+    <select id="selectALL"  resultType="model.User">
+        select *
+        from user;
+    </select>
+
+    <select id="selectByphone" resultType="model.User" >
+        select *
+        from user
+        <where>phone=#{phone}</where>
+    </select>
+
+    <select id="SelectUsernamOrphone" resultType="model.User">
+
+        select * from user
+        <where>
+            <if test="name =='' ||name==null">
+                and phone like "%" #{phone} "%";
+            </if>
+            <if test="phone =='' || phone==null">
+                and name like "%" #{name} "%";
+            </if>
+            name like "%" #{name} "%" and phone like "%" #{phone} "%";
+        </where>
+
+    </select>
+    <select id="Login" resultType="model.User">
+            select * from user
+            <where>phone =#{phone} and password =#{password}</where>
+    </select>
+
+
+</mapper>
