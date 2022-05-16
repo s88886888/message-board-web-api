@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Blob;
 import java.util.Date;
 
 public class Article {
@@ -10,9 +11,14 @@ public class Article {
     public String author;
     public int authorid;
     public String text;
+    public String Image;
 
-    public int getId() {
-        return id;
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String Image) {
+        this.Image = Image;
     }
 
     @Override
@@ -24,9 +30,15 @@ public class Article {
                 ", author='" + author + '\'' +
                 ", authorid=" + authorid +
                 ", text='" + text + '\'' +
-                ", Image='" + Image + '\'' +
+                ", Image=" + Image +
                 ", likecount=" + likecount +
                 '}';
+    }
+
+
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
@@ -73,13 +85,7 @@ public class Article {
         this.text = text;
     }
 
-    public String getImage() {
-        return Image;
-    }
 
-    public void setImage(String image) {
-        Image = image;
-    }
 
     public int getLikecount() {
         return likecount;
@@ -89,7 +95,6 @@ public class Article {
         this.likecount = likecount;
     }
 
-    public String Image;
     public int likecount;
 
 }

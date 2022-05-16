@@ -2,14 +2,25 @@ package model;
 
 public class User {
 
+    public  int id;
+
     @Override
     public String toString() {
         return "User{" +
-                "Phone='" + Phone + '\'' +
+                "id=" + id +
+                ", Phone='" + Phone + '\'' +
                 ", Email='" + Email + '\'' +
                 ", Name='" + Name + '\'' +
                 ", PassWord='" + PassWord + '\'' +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public  String Phone;

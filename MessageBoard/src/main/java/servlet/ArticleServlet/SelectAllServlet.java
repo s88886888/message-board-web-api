@@ -24,10 +24,12 @@ public class SelectAllServlet extends HttpServlet {
         ResultVo resultVo = new ResultVo();
         JsonReader jsonReader = new JsonReader();
         ArticleDao articleDao = new ArticleDao();
+
         List<Article> articles = articleDao.selectAll();
+
+
+
         jsonReader.getJson(req, response, resultVo.success(articles));
-
-
 
     }
 }

@@ -15,7 +15,7 @@ import java.io.IOException;
  * 验证token是否有效
  */
 
-@WebFilter(filterName = "TokenFilter", urlPatterns = {"/demo","/getArticleData"})
+@WebFilter(filterName = "TokenFilter", urlPatterns = {"/demo","/getArticleData","/addArticle","/updatearticle","/getmyArticleData"})
 public class TokenFilter extends HttpFilter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

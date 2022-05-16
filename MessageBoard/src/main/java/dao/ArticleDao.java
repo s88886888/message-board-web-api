@@ -11,14 +11,15 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
 public class ArticleDao {
-    public boolean UpdateBrand(int id, String name, Date time, String author,int authordid,String text,String image,int likecount) throws IOException {
+    public boolean UpdateBrand(int id, String name, String text,String image) throws IOException {
         SqlSession sqlSession = getSqlSession();
         ArticleMapper ArticleMapper = sqlSession.getMapper(ArticleMapper.class);
-        boolean returnData = ArticleMapper.updateArticle(id,name,time,author,authordid,text,image,likecount);
+        boolean returnData = ArticleMapper.updateArticle(id,name,text,image);
         //向数据库提交数据
         sqlSession.commit();
         sqlSession.close();
@@ -44,10 +45,11 @@ public class ArticleDao {
     }
 
 
-    public  boolean AddArticle(String articlename, Date time, String author, int authorid,String text,String Image,int likecount) throws IOException {
+    public  boolean AddArticle(String articlename,Date time, String author, int authorid, String text, String Image, int likecount) throws IOException {
         SqlSession sqlSession = getSqlSession();
         ArticleMapper artcleMapper = sqlSession.getMapper(ArticleMapper.class);
-        boolean returnData = artcleMapper.AddArticle(articlename, time, author, authorid,text,Image,likecount);
+        boolean returnData = artcleMapper.AddArticle(articlename, time, author, authorid,text, Image,likecount);
+
         //向数据库提交数据
         sqlSession.commit();
         sqlSession.close();
@@ -67,10 +69,10 @@ public class ArticleDao {
 
     public static List<Article> selectAll() throws IOException {
         SqlSession sqlSession = getSqlSession();
-        ArticleMapper brandMapper = sqlSession.getMapper(ArticleMapper.class);
-        List<Article> brand = brandMapper.selectALL();
+        ArticleMapper  articleMapper = sqlSession.getMapper(ArticleMapper.class);
+        List<Article> Article = articleMapper.selectALL();
         sqlSession.close();
-        return brand;
+        return Article;
     }
 
     public Article selectByid(int id) throws IOException {
@@ -81,6 +83,13 @@ public class ArticleDao {
         return Article;
     }
 
+    public List<Article> selectByauthor(String author) throws IOException {
+        SqlSession sqlSession = getSqlSession();
+        ArticleMapper ArticleMapper = sqlSession.getMapper(ArticleMapper.class);
+        List<Article> Article = (List<model.Article>) ArticleMapper.Selectarticlebyauthor(author);
+        sqlSession.close();
+        return Article;
+    }
 
 
     private static SqlSession getSqlSession() throws IOException {

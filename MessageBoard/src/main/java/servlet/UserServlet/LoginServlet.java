@@ -27,8 +27,8 @@ public class LoginServlet extends HttpServlet {
 
 
 
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html;charset=utf-8");
+        resp.setContentType("application/json; charset=utf-8");
+        resp.setCharacterEncoding("UTF-8");
 
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
@@ -50,8 +50,10 @@ public class LoginServlet extends HttpServlet {
                 jsonReader.getJson(req, resp, resultVo.error("登录失败"));
             } else {
                User user = userDao.selectByphone(phone);
+
                 String token = Token.getToken(user.getPhone());
                 resp.setHeader("token", token);
+
                 jsonReader.getJson(req, resp, resultVo.success("登录成功"));
             }
 

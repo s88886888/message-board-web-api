@@ -23,12 +23,12 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Access-Control-Allow-Origin", "*");
-        /* 星号表示所有的异域请求都可以接受， */
-        resp.setHeader("Access-Control-Allow-Methods", "GET,POST");
 
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html;charset=utf-8");
+
+
+        resp.setContentType("application/json; charset=utf-8");
+        resp.setCharacterEncoding("UTF-8");
+
 
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
@@ -81,7 +81,7 @@ public class RegisterServlet extends HttpServlet {
             }
 
         }catch (Exception e){
-            return;
+            jsonReader.getJson(req,resp,resultVo.error(e.getMessage()));
         }
 
 

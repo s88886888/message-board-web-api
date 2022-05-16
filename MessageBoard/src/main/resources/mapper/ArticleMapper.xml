@@ -8,38 +8,33 @@
 
     <insert id="AddArticle">
 
-
         insert into article(articlename,
-                            time,
+                            `time`,
                             author,
                             authorid,
                             text,
                             Image,
-                            likecount) value (
-        articlenam=#{articlenam},
-            time =#{time},
-            author=#{author},
-            authorid=#{authorid},
-            text=#{text},
-            Image=#{image},
-            likecount=#{likecount}
+                            likecount)
+            value (#{articlename},
+            #{time},
+            #{author},
+            #{authorid},
+            #{text},
+            #{Image},
+            #{likecount}
             )
 
 
     </insert>
     <update id="updateArticle">
-        update artcle set articlenam=#{articlenam},
-        time=#{time},
-        author=#{author},
-        authorid=#{authorid},
+        update article set articlenam=#{articlenam},
         text=#{text},
         Image=#{image},
-        likecount=#{likecount}
         <where>id=#{id}</where>
 
     </update>
     <delete id="delectByid">
-        delete form artcle
+        delete FROM article
         <where>id=#{id}</where>
     </delete>
     <select id="selectALL" resultType="model.Article">
@@ -47,19 +42,25 @@
         from article
     </select>
     <select id="selectByid" resultType="model.Article">
-        select * from artcle
+        select * from article
         <where>id=#{id}</where>
     </select>
     <select id="SelectarticlenameOrauthor" resultType="model.Article">
-        select * form artcle
-        <if test="author =='' ||author==null">
-            and articlename like "%" #{articlename} "%";
-        </if>
-        <if test="articlename =='' || articlename==null">
-            and author like "%" #{author} "%";
-        </if>
-        name like "%" #{author} "%" and phone like "%" #{articlename} "%";
+
+        select * FROM article
+        <where>
+            <if test="author =='' ||author==null">
+                and articlename like "%" #{articlename} "%";
+            </if>
+
+            <if test="articlename =='' || articlename==null">
+                and author like "%" #{author} "%";
+            </if>
+            author like "%" #{author} "%" and articlename like "%" #{articlename} "%";
+        </where>
     </select>
-
-
+    <select id="Selectarticlebyauthor" resultType="model.Article">
+        select * from article
+        <where>author=#{author}</where>
+    </select>
 </mapper>
