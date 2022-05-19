@@ -7,9 +7,9 @@
 
     <insert id="AddUser">
         insert INTO user (name,
-                             phone,
-                             password,
-                             email)
+                          phone,
+                          password,
+                          email)
         values (#{name},
                 #{phone},
                 #{password},
@@ -26,12 +26,12 @@
 
     </update>
 
-    <select id="selectALL"  resultType="model.User">
+    <select id="selectALL" resultType="model.User">
         select *
         from user;
     </select>
 
-    <select id="selectByphone" resultType="model.User" >
+    <select id="selectByphone" resultType="model.User">
         select *
         from user
         <where>phone=#{phone}</where>
@@ -52,8 +52,8 @@
 
     </select>
     <select id="Login" resultType="model.User">
-            select * from user
-            <where>phone =#{phone} and password =#{password}</where>
+        select * from user
+        <where>phone =#{phone} and password =#{password}</where>
     </select>
 
 

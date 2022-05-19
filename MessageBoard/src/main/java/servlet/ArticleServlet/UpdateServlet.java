@@ -15,8 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
-@WebServlet("/updatearticle")
+@WebServlet("/updateArticle")
 public class UpdateServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -26,18 +27,15 @@ public class UpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        resp.setContentType("application/json; charset=utf-8");
-        resp.setCharacterEncoding("UTF-8");
-
-        int id = Integer.parseInt(req.getParameter("id"));
-
         String articlename = req.getParameter("articlename");
         String text = req.getParameter("text");
         String img = req.getParameter("img");
+        int id = Integer.parseInt(req.getParameter("id"));
 
 
         ResultVo resultVo = new ResultVo();
         JsonReader jsonReader = new JsonReader();
+
 
         if (articlename == "") {
             jsonReader.getJson(req, resp, resultVo.error("作品名字不可以为空"));
@@ -60,8 +58,8 @@ public class UpdateServlet extends HttpServlet {
                 jsonReader.getJson(req, resp, resultVo.error("异常用户"));
                 return;
             }
-            if (articleDao.UpdateBrand(id,articlename, text, img)) {
-                jsonReader.getJson(req, resp, resultVo.success("注册成功"));
+            if (articleDao.UpdateArticle(id, articlename, text, img)) {
+                jsonReader.getJson(req, resp, resultVo.success("修改成功"));
             } else {
                 jsonReader.getJson(req, resp, resultVo.error("注册失败"));
                 return;
@@ -72,3 +70,6 @@ public class UpdateServlet extends HttpServlet {
         }
     }
 }
+
+
+

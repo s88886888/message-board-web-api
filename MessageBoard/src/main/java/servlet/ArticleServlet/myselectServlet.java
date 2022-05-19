@@ -26,8 +26,6 @@ public class myselectServlet extends HttpServlet {
         ArticleDao articleDao = new ArticleDao();
 
 
-
-
         String token = req.getHeader("token");
 
         UserDao userDao = new UserDao();

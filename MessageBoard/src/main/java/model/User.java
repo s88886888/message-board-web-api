@@ -2,7 +2,11 @@ package model;
 
 public class User {
 
-    public  int id;
+    public int id;
+    public String Phone;
+    public String Email;
+    public String Name;
+    public String PassWord;
 
     @Override
     public String toString() {
@@ -23,8 +27,6 @@ public class User {
         this.id = id;
     }
 
-    public  String Phone;
-
     public String getPhone() {
         return Phone;
     }
@@ -41,9 +43,6 @@ public class User {
         Email = email;
     }
 
-    public String Email;
-    public String Name;
-
     public String getName() {
         return Name;
     }
@@ -59,6 +58,4 @@ public class User {
     public void setPassWord(String passWord) {
         PassWord = passWord;
     }
-
-    public String PassWord;
 }

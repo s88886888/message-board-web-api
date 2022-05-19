@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 public class JsonReader {
 
 
-    public void getJson(HttpServletRequest request, HttpServletResponse response, Object object){
+    public void getJson(HttpServletRequest request, HttpServletResponse response, Object object) {
         response.setContentType("text/html;charset=UTF-8");
         /** 设置响应头允许跨域访问 **/
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -24,8 +24,8 @@ public class JsonReader {
 
 
         //禁用缓存，确保网页信息是最新数据
-        response.setHeader("Pragma","No-cache");
-        response.setHeader("Cache-Control","no-cache");
+        response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", -10);
         PrintWriter out = null;
         try {
@@ -36,7 +36,7 @@ public class JsonReader {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }finally{
+        } finally {
             out.close();
         }
     }

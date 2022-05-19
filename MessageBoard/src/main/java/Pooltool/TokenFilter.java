@@ -3,7 +3,6 @@ package Pooltool;
 import com.alibaba.fastjson.JSONObject;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
@@ -15,12 +14,11 @@ import java.io.IOException;
  * 验证token是否有效
  */
 
-@WebFilter(filterName = "TokenFilter", urlPatterns = {"/demo","/getArticleData","/addArticle","/updatearticle","/getmyArticleData"})
+@WebFilter(filterName = "TokenFilter", urlPatterns = {"/demo", "/getArticleData", "/addArticle", "/getmyArticleData"})
 public class TokenFilter extends HttpFilter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException {
-
 
 
         request.setCharacterEncoding("UTF-8");

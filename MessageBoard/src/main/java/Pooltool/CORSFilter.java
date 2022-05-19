@@ -40,29 +40,24 @@ public class CORSFilter extends HttpFilter {
 //        'Access-Control-Allow-Headers:x-requested-with,content-type'
 
 
-
-
-
         response.setContentType("application/json; charset=utf-8");
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
 
 
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type,token");
-
         response.setHeader("Access-Control-Allow-Origin", "*");
         //所有请求方式：|GET|POST|HEAD ......一般只能写三个
         response.setHeader("Access-Control-Allow-Methods", "*");
 
-//        response.setHeader("Access-Control-Request-Headers", "*");
+        response.setHeader("Access-Control-Request-Headers", "*");
 
 
         //服务器向客户端暴露的header字段，用于客户端获取response的头部信息，多个用逗号分隔。CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定。
-         response.setHeader("Access-Control-Expose-Headers", "token");
+        response.setHeader("Access-Control-Expose-Headers", "*");
 
 
-
-
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,content-type,token");
+        response.setHeader("Access-Control-Expose-Headers", "token");
         System.out.println("拦截工作中");
 
         chain.doFilter(request, response);

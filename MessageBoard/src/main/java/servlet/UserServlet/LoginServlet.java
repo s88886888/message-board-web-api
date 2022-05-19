@@ -6,7 +6,6 @@ import dao.UserDao;
 import model.ResultVo;
 import model.User;
 
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +22,6 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
 
 
         resp.setContentType("application/json; charset=utf-8");
@@ -49,7 +46,7 @@ public class LoginServlet extends HttpServlet {
             if (userDao.Login(phone, password) == null) {
                 jsonReader.getJson(req, resp, resultVo.error("登录失败"));
             } else {
-               User user = userDao.selectByphone(phone);
+                User user = userDao.selectByphone(phone);
 
                 String token = Token.getToken(user.getPhone());
                 resp.setHeader("token", token);

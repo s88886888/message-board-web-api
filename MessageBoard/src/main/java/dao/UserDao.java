@@ -33,7 +33,6 @@ public class UserDao {
 //        System.out.print(demolist);
 
 
-
 //        System.out.println("删除");
 //        delect(4);
 
@@ -42,15 +41,13 @@ public class UserDao {
 
     }
 
+    public static List<User> selectAll() throws IOException {
 
-    public boolean UpdateBrand(int id, String name, String email, String password) throws IOException {
         SqlSession sqlSession = getSqlSession();
         UserMapper brandMapper = sqlSession.getMapper(UserMapper.class);
-        boolean returnData = brandMapper.updateUser(id, name, email,password);
-        //向数据库提交数据
-        sqlSession.commit();
+        List<User> brand = brandMapper.selectALL();
         sqlSession.close();
-        return returnData;
+        return brand;
     }
 
 //    public boolean delect(int id) throws IOException {
@@ -70,18 +67,35 @@ public class UserDao {
 //        }
 //    }
 
+    private static SqlSession getSqlSession() throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        //自动提交事务 开关
+        SqlSession sqlSession = sqlSessionFactory.openSession(false);
+        return sqlSession;
+    }
 
-    public  boolean AddbUser(String name, String phone, String password, String email) throws IOException {
+    public boolean UpdateBrand(int id, String name, String email, String password) throws IOException {
+        SqlSession sqlSession = getSqlSession();
+        UserMapper brandMapper = sqlSession.getMapper(UserMapper.class);
+        boolean returnData = brandMapper.updateUser(id, name, email, password);
+        //向数据库提交数据
+        sqlSession.commit();
+        sqlSession.close();
+        return returnData;
+    }
+
+    public boolean AddbUser(String name, String phone, String password, String email) throws IOException {
         SqlSession sqlSession = getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         boolean returnData = userMapper.AddUser(name, phone, password, email);
         //向数据库提交数据
         sqlSession.commit();
         sqlSession.close();
-        System.out.println(returnData+"又注册一个");
+        System.out.println(returnData + "又注册一个");
         return returnData;
     }
-
 
     public List<User> selectLikeData(String name, String phone) throws IOException {
         SqlSession sqlSession = getSqlSession();
@@ -91,17 +105,7 @@ public class UserDao {
         return user;
     }
 
-
-    public static List<User> selectAll() throws IOException {
-
-        SqlSession sqlSession = getSqlSession();
-        UserMapper brandMapper = sqlSession.getMapper(UserMapper.class);
-        List<User> brand = brandMapper.selectALL();
-        sqlSession.close();
-        return brand;
-    }
-
-    public  User selectByphone(String phone) throws IOException {
+    public User selectByphone(String phone) throws IOException {
         SqlSession sqlSession = getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         User user = userMapper.selectByphone(phone);
@@ -112,22 +116,11 @@ public class UserDao {
     public User Login(String phone, String password) throws IOException {
         SqlSession sqlSession = getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        User user = userMapper.Login(phone,password);
+        User user = userMapper.Login(phone, password);
         sqlSession.close();
 
-        return  user ;
+        return user;
     }
-
-
-    private static SqlSession getSqlSession() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        //自动提交事务 开关
-        SqlSession sqlSession = sqlSessionFactory.openSession(false);
-        return sqlSession;
-    }
-
 
 
 }

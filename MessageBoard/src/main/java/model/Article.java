@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Blob;
 import java.util.Date;
 
 public class Article {
@@ -12,6 +11,7 @@ public class Article {
     public int authorid;
     public String text;
     public String Image;
+    public int likecount;
 
     public String getImage() {
         return Image;
@@ -34,8 +34,6 @@ public class Article {
                 ", likecount=" + likecount +
                 '}';
     }
-
-
 
     public int getId() {
         return id;
@@ -85,8 +83,6 @@ public class Article {
         this.text = text;
     }
 
-
-
     public int getLikecount() {
         return likecount;
     }
@@ -94,7 +90,5 @@ public class Article {
     public void setLikecount(int likecount) {
         this.likecount = likecount;
     }
-
-    public int likecount;
 
 }

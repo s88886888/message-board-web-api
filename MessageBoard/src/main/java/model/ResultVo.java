@@ -14,12 +14,16 @@ public class ResultVo {
         this.msg = msg;
         this.data = data;
     }
-    public ResultVo(){}
-    public ResultVo success(Object data){
-        return new ResultVo(200,"success",data);
+
+    public ResultVo() {
     }
-    public ResultVo error(Object data){
-        return new ResultVo(201,"error",data);
+
+    public ResultVo success(Object data) {
+        return new ResultVo(200, "success", data);
+    }
+
+    public ResultVo error(Object data) {
+        return new ResultVo(201, "error", data);
     }
 
     public int getCode() {
