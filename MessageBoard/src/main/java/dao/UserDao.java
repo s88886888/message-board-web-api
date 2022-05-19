@@ -118,9 +118,37 @@ public class UserDao {
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         User user = userMapper.Login(phone, password);
         sqlSession.close();
-
         return user;
     }
+
+
+    public boolean deletebyid(int id) throws IOException {
+        SqlSession sqlSession = getSqlSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        boolean user = userMapper.deletebyid(id);
+        sqlSession.commit();
+        sqlSession.close();
+        return user;
+    }
+
+
+
+    public User selectbyid(int id) throws IOException {
+        SqlSession sqlSession = getSqlSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        User user = userMapper.selectByid(id);
+        sqlSession.close();
+        return user;
+    }
+
+    public User selectbyname(String name) throws IOException {
+        SqlSession sqlSession = getSqlSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        User user = userMapper.selectByname(name);
+        sqlSession.close();
+        return user;
+    }
+
 
 
 }

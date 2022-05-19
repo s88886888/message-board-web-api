@@ -18,9 +18,9 @@
         </environment>
     </environments>
 
-<!--        <mappers>-->
-<!--            <mapper resource="mapper/UserMapper.xml"/>-->
-<!--        </mappers>-->
+    <!--        <mappers>-->
+    <!--            <mapper resource="mapper/UserMapper.xml"/>-->
+    <!--        </mappers>-->
     <!--    resource下文件目录，是其与接口mapper的目录完全一致-->
     <mappers>
         <package name="mapper"/>

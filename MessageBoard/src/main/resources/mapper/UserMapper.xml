@@ -26,6 +26,11 @@
 
     </update>
 
+    <delete id="deletebyid">
+        delete from user
+        <where>id=#{id}</where>
+    </delete>
+
     <select id="selectALL" resultType="model.User">
         select *
         from user;
@@ -54,6 +59,13 @@
     <select id="Login" resultType="model.User">
         select * from user
         <where>phone =#{phone} and password =#{password}</where>
+    </select>
+    <select id="selectByid" resultType="model.User">
+        select *from user
+        <where>id=#{id}</where>
+    </select>
+    <select id="selectByname" resultType="model.User">
+   select  *from user <where>name=#{name}</where>
     </select>
 
 

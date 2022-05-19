@@ -50,8 +50,9 @@ public class ArticleDao {
             System.out.println("没有这条记录");
             return false;
         } else {
-            Article returnData = ArticleMapper.selectByid(id);
-            //向数据库提交数据
+
+            ArticleMapper articleMapper = sqlSession.getMapper(ArticleMapper.class);
+            articleMapper.delectByid(id);
             sqlSession.commit();
             sqlSession.close();
             return true;

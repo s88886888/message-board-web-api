@@ -35,7 +35,7 @@
 
     </update>
     <delete id="delectByid">
-        delete FROM article
+        delete from article
         <where>id=#{id}</where>
     </delete>
     <select id="selectALL" resultType="model.Article">
