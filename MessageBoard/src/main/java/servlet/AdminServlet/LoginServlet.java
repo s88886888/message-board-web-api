@@ -48,16 +48,13 @@ public class LoginServlet extends HttpServlet {
                 Admin Admin = AdminDao.Selectbyname(name);
 
                 String token = Token.getToken(Admin.getName());
+
                 resp.setHeader("token", token);
 
                 jsonReader.getJson(req, resp, resultVo.success("登录成功"));
             }
-
         } catch (Exception e) {
             jsonReader.getJson(req, resp, resultVo.success(e.getMessage()));
         }
-        
-        
-        
     }
 }

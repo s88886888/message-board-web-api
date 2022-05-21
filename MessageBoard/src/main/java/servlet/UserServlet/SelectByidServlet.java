@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @WebServlet("/selectuserbyname")
@@ -30,7 +31,7 @@ public class SelectByidServlet extends HttpServlet {
         UserDao userDao = new UserDao();
         String name = req.getParameter("name");
 
-        User user = userDao.selectbyname(name);
+        List<User> user  = userDao.selectbyname(name);
         jsonReader.getJson(req, resp, resultVo.success(user));
     }
 }

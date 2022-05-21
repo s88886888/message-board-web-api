@@ -141,10 +141,10 @@ public class UserDao {
         return user;
     }
 
-    public User selectbyname(String name) throws IOException {
+    public  List<User> selectbyname(String name) throws IOException {
         SqlSession sqlSession = getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        User user = userMapper.selectByname(name);
+        List<User> user = userMapper.selectByname(name);
         sqlSession.close();
         return user;
     }

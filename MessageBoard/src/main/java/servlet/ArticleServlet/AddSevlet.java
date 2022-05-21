@@ -51,8 +51,9 @@ public class AddSevlet extends HttpServlet {
         ArticleDao articleDao = new ArticleDao();
         UserDao userDao = new UserDao();
         Date time = new Date(new Date().getTime());
-        String token = req.getHeader("token");
+
         try {
+            String token = req.getHeader("token");
             String phone = Token.verifyToken(token);
             User user = userDao.selectByphone(phone);
             if (user == null) {

@@ -26,11 +26,13 @@ public interface ArticleMapper {
 
     List<Article> Selectarticlebyauthor(String author);
 
-    Article SelectarticlenameOrauthor(@Param("articlename") String articlename, @Param("author") String author);
+    List<Article> selectarticlename(String articlename);
 
     boolean updateArticle(@Param("id") int id, @Param("articlename") String articlename, @Param("text") String text, @Param("Image") String Image);
 
     boolean delectByid(@Param("id") int id);
+
+
 
 
 }

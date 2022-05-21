@@ -71,10 +71,10 @@ public class ArticleDao {
         return returnData;
     }
 
-    public List<Article> selectLikeData(String articlename, String author) throws IOException {
+    public List<Article> selectLikeData(String articlename) throws IOException {
         SqlSession sqlSession = getSqlSession();
         ArticleMapper ArticleMapper = sqlSession.getMapper(ArticleMapper.class);
-        List<Article> Article = (List<model.Article>) ArticleMapper.SelectarticlenameOrauthor(articlename, author);
+        List<Article> Article = (List<model.Article>) ArticleMapper.selectarticlename(articlename);
         sqlSession.close();
         return Article;
     }
@@ -90,7 +90,7 @@ public class ArticleDao {
     public List<Article> selectByauthor(String author) throws IOException {
         SqlSession sqlSession = getSqlSession();
         ArticleMapper ArticleMapper = sqlSession.getMapper(ArticleMapper.class);
-        List<Article> Article = (List<model.Article>) ArticleMapper.Selectarticlebyauthor(author);
+        List<Article> Article = ArticleMapper.Selectarticlebyauthor(author);
         sqlSession.close();
         return Article;
     }

@@ -10,19 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
-@WebServlet("/selectByid")
-public class Selectbyid extends HttpServlet {
+@WebServlet("/selectByname")
+public class Selectbyname extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         ResultVo resultVo = new ResultVo();
         JsonReader jsonReader = new JsonReader();
         ArticleDao articleDao = new ArticleDao();
-        int id = Integer.parseInt(req.getParameter("id"));
-        Article articles = articleDao.selectByid(id);
+
+        String name = req.getParameter("name");
+
+        List<Article> articles = articleDao.selectLikeData(name);
+
         jsonReader.getJson(req, resp, resultVo.success(articles));
+
     }
 
 }

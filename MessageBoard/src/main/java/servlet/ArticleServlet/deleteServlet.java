@@ -1,9 +1,14 @@
 package servlet.ArticleServlet;
 
 import Pooltool.JsonReader;
+import Pooltool.Token;
+import dao.AdminDao;
 import dao.ArticleDao;
+import dao.UserDao;
+import model.Admin;
 import model.Article;
 import model.ResultVo;
+import model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,26 +35,46 @@ public class deleteServlet extends HttpServlet {
 
          Article article = articleDao.selectByid(id);
 
-         if (article==null)
-         {
-             jsonReader.getJson(req, resp, resultVo.error("文章不存在"));
-             return;
-         }
-         else
-         {
+        UserDao userDao = new UserDao();
+        AdminDao adminDao = new AdminDao();
 
-           if ( articleDao.delect(id))
-           {
-               jsonReader.getJson(req, resp, resultVo.error("删除成功"));
-               return;
-           }
-           else
-           {
-               jsonReader.getJson(req, resp, resultVo.error("删除错误"));
-               return;
-           }
+        String token = req.getHeader("token");
 
-         }
 
+
+
+        try {
+
+            String   key = Token.verifyToken(token);
+            User user = userDao.selectByphone(key);
+            Admin admin = adminDao.Selectbyname(key);
+
+            if (user == null||admin == null) {
+                jsonReader.getJson(req, resp, resultVo.error("异常用户"));
+                return;
+            }
+            if (article==null)
+            {
+                jsonReader.getJson(req, resp, resultVo.error("文章不存在"));
+                return;
+            }
+            else
+            {
+                if ( articleDao.delect(id))
+                {
+                    jsonReader.getJson(req, resp, resultVo.error("删除成功"));
+                    return;
+                }
+                else
+                {
+                    jsonReader.getJson(req, resp, resultVo.error("删除错误"));
+                    return;
+                }
+            }
+
+        } catch (Exception e) {
+            jsonReader.getJson(req, resp, resultVo.error("未知错误"));
+            return;
+        }
     }
 }

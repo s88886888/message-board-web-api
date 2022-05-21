@@ -27,7 +27,7 @@ public interface UserMapper {
 
     boolean deletebyid(int id);
 
-    User selectByname(String name);
+    List<User> selectByname(String name);
 
 
 }
