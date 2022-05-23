@@ -2,10 +2,8 @@ package servlet.AdminServlet;
 
 import Pooltool.JsonReader;
 import Pooltool.Token;
-import com.sun.net.httpserver.HttpsServer;
 import dao.AdminDao;
 import dao.ArticleDao;
-import dao.AdminDao;
 import model.ResultVo;
 import model.Admin;
 
@@ -19,7 +17,7 @@ import java.util.Date;
 
 
 @WebServlet("/updateServletbyadmin")
-public class updateServletbyadmin extends HttpServlet {
+public class UpdateArticlebyadmin extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
