@@ -28,9 +28,16 @@
     </insert>
     <update id="updateArticle">
         update article
-        set articlename=#{articlename},
-        text=#{text},
-        Image=#{Image}
+
+        <if test="Image==''||Image==null">
+            set articlename=#{articlename},
+            text=#{text}
+        </if>
+        <if test="Image!=''||Image!=null">
+            set articlename=#{articlename},
+            text=#{text},
+            Image=#{Image}
+        </if>
         <where>id=#{id}</where>
 
     </update>
@@ -46,18 +53,10 @@
         select * from article
         <where>id=#{id}</where>
     </select>
-    <select id="SelectarticlenameOrauthor" resultType="model.Article">
-
+    <select id="selectarticlename" resultType="model.Article">
         select * FROM article
         <where>
-            <if test="author =='' ||author==null">
-                and articlename like "%" #{articlename} "%";
-            </if>
-
-            <if test="articlename =='' || articlename==null">
-                and author like "%" #{author} "%";
-            </if>
-            author like "%" #{author} "%" and articlename like "%" #{articlename} "%";
+            articlename like "%" #{articlename} "%";
         </where>
     </select>
     <select id="Selectarticlebyauthor" resultType="model.Article">

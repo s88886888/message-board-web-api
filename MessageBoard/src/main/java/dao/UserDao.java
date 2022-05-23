@@ -76,7 +76,7 @@ public class UserDao {
         return sqlSession;
     }
 
-    public boolean UpdateBrand(int id, String name, String email, String password) throws IOException {
+    public boolean UpdateAdmin(int id, String name, String email, String password) throws IOException {
         SqlSession sqlSession = getSqlSession();
         UserMapper brandMapper = sqlSession.getMapper(UserMapper.class);
         boolean returnData = brandMapper.updateUser(id, name, email, password);

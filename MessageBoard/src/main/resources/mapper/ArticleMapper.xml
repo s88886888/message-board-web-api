@@ -28,9 +28,16 @@
     </insert>
     <update id="updateArticle">
         update article
-        set articlename=#{articlename},
-        text=#{text},
-        Image=#{Image}
+
+        <if test="Image==''||Image==null">
+            set articlename=#{articlename},
+            text=#{text}
+        </if>
+        <if test="Image!=''||Image!=null">
+            set articlename=#{articlename},
+            text=#{text},
+            Image=#{Image}
+        </if>
         <where>id=#{id}</where>
 
     </update>
