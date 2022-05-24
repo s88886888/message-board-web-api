@@ -76,10 +76,10 @@ public class UserDao {
         return sqlSession;
     }
 
-    public boolean UpdateAdmin(int id, String name, String email, String password) throws IOException {
+    public boolean updateUser(int id, String name, String password,String phone,String email) throws IOException {
         SqlSession sqlSession = getSqlSession();
         UserMapper brandMapper = sqlSession.getMapper(UserMapper.class);
-        boolean returnData = brandMapper.updateUser(id, name, email, password);
+        boolean returnData = brandMapper.updateUser(id, name,password,phone,email);
         //向数据库提交数据
         sqlSession.commit();
         sqlSession.close();

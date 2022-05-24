@@ -19,9 +19,11 @@
 
     <update id="updateUser">
 
-        update user set name =#{name},
+        update user set
+        name =#{name},
         email=#{email},
-        password=#{password},
+        phone =#{phone},
+        password=#{password}
         <where>id=#{id}</where>
 
     </update>

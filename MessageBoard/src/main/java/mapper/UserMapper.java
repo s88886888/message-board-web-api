@@ -21,7 +21,7 @@ public interface UserMapper {
 
     User SelectUsernamOrphone(@Param("name") String name, @Param("phone") String Password);
 
-    boolean updateUser(@Param("id") int id, @Param("name") String name, @Param("password") String password, @Param("email") String email);
+    boolean updateUser(@Param("id") int id, @Param("name") String name, @Param("password") String password,@Param("phone") String phone, @Param("email") String email);
 
     User Login(@Param("phone") String Phone, @Param("password") String Password);
 
