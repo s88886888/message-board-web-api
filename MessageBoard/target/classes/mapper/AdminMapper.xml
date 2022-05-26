@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.AdminMapper">
+
+
+    <insert id="addAdmin">
+
+        insert into Admin(name,password,`time`)value (#{name},#{password},#{time})
+
+
+    </insert>
+    <update id="updateAdmin">
+        update Admin
+        set name=#{name},
+        password=#{text}
+        <where>id=#{id}</where>
+
+    </update>
+    <delete id="deletebyid">
+        delete from Admin
+        <where>id=#{id}</where>
+    </delete>
+
+    <select id="selectALL" resultType="model.Admin">
+        select *
+        from Admin
+    </select>
+
+    <select id="selectByid" resultType="model.Admin">
+        select * from Admin
+        <where>id=#{id}</where>
+    </select>
+    <select id="Login" resultType="model.Admin">
+
+select  *from admin  <where> name=#{name} and password=#{password}</where>
+    </select>
+    <select id="selectbyname" resultType="model.Admin">
+        select * from Admin <where> name=#{name}</where>
+    </select>
+
+
+</mapper>
