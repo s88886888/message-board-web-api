@@ -1,6 +1,6 @@
 package Pooltool;
 
-import com.alibaba.fastjson.JSONObject;
+import model.ResultVo;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletRequest;
@@ -8,13 +8,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
  * 验证token是否有效
  */
 
-@WebFilter(filterName = "TokenFilter", urlPatterns = {"/addArticle"})
+@WebFilter(filterName = "TokenFilter", urlPatterns = {"/addArticle", "/getArticleData", "/deletearticle"})
 public class TokenFilter extends HttpFilter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -25,31 +26,29 @@ public class TokenFilter extends HttpFilter {
         response.setContentType("text/html;charset=utf-8");
 
         HttpServletRequest req = (HttpServletRequest) request;
+
+        HttpServletResponse resp = (HttpServletResponse) response;
         // 获取token
         String token = req.getHeader("token");
-        JSONObject jsonObject = new JSONObject();
+
+        ResultVo resultVo = new ResultVo();
+        JsonReader jsonReader = new JsonReader();
+
 
         if (token != null) {
             try {
                 String username = Token.verifyToken(token);
                 if (username == null) {
-                    jsonObject.put("err", "用户失效, 请重新登陆");
-                    jsonObject.put("errcode", "998");
-                    response.getWriter().print(jsonObject.toJSONString());
+                    jsonReader.getJson(req, resp, resultVo.error("token失效，请重新登录"));
                 } else {
-                    // 验证成功
-                    req.setAttribute("username", username);
+                    // 验证成功 放行
                     chain.doFilter(req, response);
                 }
             } catch (Exception e) {
-                jsonObject.put("err", e.getMessage());
-                jsonObject.put("errcode", "999");
-                response.getWriter().print(jsonObject.toJSONString());
+                jsonReader.getJson(req, resp, resultVo.error(e.getMessage()));
             }
         } else {
-            jsonObject.put("err", "尚未登录, 请登陆");
-            jsonObject.put("errcode", "998");
-            response.getWriter().print(jsonObject.toJSONString());
+            jsonReader.getJson(req, resp, resultVo.error("未登录，请先登录"));
         }
 
     }

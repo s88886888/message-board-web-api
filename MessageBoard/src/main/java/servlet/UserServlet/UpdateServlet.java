@@ -3,7 +3,6 @@ package servlet.UserServlet;
 import Pooltool.JsonReader;
 import Pooltool.Token;
 import dao.AdminDao;
-import dao.ArticleDao;
 import dao.UserDao;
 import model.Admin;
 import model.ResultVo;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 
 
 @WebServlet("/updateUser")
@@ -29,6 +27,7 @@ public class UpdateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String Phone = req.getParameter("phone");
         String Email = req.getParameter("email");
         String Name = req.getParameter("name");
@@ -38,9 +37,17 @@ public class UpdateServlet extends HttpServlet {
 
         ResultVo resultVo = new ResultVo();
         JsonReader jsonReader = new JsonReader();
+        UserDao userDao = new UserDao();
 
         if (Phone.equals("")) {
-            jsonReader.getJson(req, resp, resultVo.error("作品名字不可以为空"));
+            jsonReader.getJson(req, resp, resultVo.error("电话不可以为空"));
+            return;
+        }
+
+        User phoneuser = userDao.selectByphone(Phone);
+
+        if (phoneuser != null) {
+            jsonReader.getJson(req, resp, resultVo.error("电话已经存在了"));
             return;
         } else if (Email.equals("")) {
             jsonReader.getJson(req, resp, resultVo.error("Email不能为空"));
@@ -55,10 +62,8 @@ public class UpdateServlet extends HttpServlet {
             jsonReader.getJson(req, resp, resultVo.error("id不能为空"));
             return;
         }
-        UserDao userDao = new UserDao();
+
         AdminDao adminDao = new AdminDao();
-
-
 
         try {
             String token = req.getHeader("token");
@@ -69,7 +74,7 @@ public class UpdateServlet extends HttpServlet {
                 jsonReader.getJson(req, resp, resultVo.error("异常用户"));
                 return;
             }
-            if (userDao.updateUser(id, Name,PassWord,Phone,Email)) {
+            if (userDao.updateUser(id, Name, PassWord, Phone, Email)) {
                 jsonReader.getJson(req, resp, resultVo.success("修改成功"));
             } else {
                 jsonReader.getJson(req, resp, resultVo.error("修改失败"));

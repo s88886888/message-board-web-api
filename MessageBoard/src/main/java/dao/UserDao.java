@@ -1,14 +1,11 @@
 package dao;
 
+import Pooltool.MyBatisUtils;
 import mapper.UserMapper;
 import model.User;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 public class UserDao {
@@ -43,7 +40,7 @@ public class UserDao {
 
     public static List<User> selectAll() throws IOException {
 
-        SqlSession sqlSession = getSqlSession();
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper brandMapper = sqlSession.getMapper(UserMapper.class);
         List<User> brand = brandMapper.selectALL();
         sqlSession.close();
@@ -51,7 +48,7 @@ public class UserDao {
     }
 
 //    public boolean delect(int id) throws IOException {
-//        SqlSession sqlSession = getSqlSession();
+//       SqlSession  sqlSession = MyBatisUtils.getSqlSession();
 //        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 //
 //        String a = selectByphone(id);
@@ -67,19 +64,11 @@ public class UserDao {
 //        }
 //    }
 
-    private static SqlSession getSqlSession() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        //自动提交事务 开关
-        SqlSession sqlSession = sqlSessionFactory.openSession(false);
-        return sqlSession;
-    }
 
-    public boolean updateUser(int id, String name, String password,String phone,String email) throws IOException {
-        SqlSession sqlSession = getSqlSession();
+    public boolean updateUser(int id, String name, String password, String phone, String email) throws IOException {
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper brandMapper = sqlSession.getMapper(UserMapper.class);
-        boolean returnData = brandMapper.updateUser(id, name,password,phone,email);
+        boolean returnData = brandMapper.updateUser(id, name, password, phone, email);
         //向数据库提交数据
         sqlSession.commit();
         sqlSession.close();
@@ -87,7 +76,7 @@ public class UserDao {
     }
 
     public boolean AddbUser(String name, String phone, String password, String email) throws IOException {
-        SqlSession sqlSession = getSqlSession();
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         boolean returnData = userMapper.AddUser(name, phone, password, email);
         //向数据库提交数据
@@ -98,7 +87,7 @@ public class UserDao {
     }
 
     public List<User> selectLikeData(String name, String phone) throws IOException {
-        SqlSession sqlSession = getSqlSession();
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         List<User> user = (List<User>) userMapper.SelectUsernamOrphone(name, phone);
         sqlSession.close();
@@ -106,7 +95,7 @@ public class UserDao {
     }
 
     public User selectByphone(String phone) throws IOException {
-        SqlSession sqlSession = getSqlSession();
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         User user = userMapper.selectByphone(phone);
         sqlSession.close();
@@ -114,7 +103,7 @@ public class UserDao {
     }
 
     public User Login(String phone, String password) throws IOException {
-        SqlSession sqlSession = getSqlSession();
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         User user = userMapper.Login(phone, password);
         sqlSession.close();
@@ -123,7 +112,7 @@ public class UserDao {
 
 
     public boolean deletebyid(int id) throws IOException {
-        SqlSession sqlSession = getSqlSession();
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         boolean user = userMapper.deletebyid(id);
         sqlSession.commit();
@@ -132,23 +121,21 @@ public class UserDao {
     }
 
 
-
     public User selectbyid(int id) throws IOException {
-        SqlSession sqlSession = getSqlSession();
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         User user = userMapper.selectByid(id);
         sqlSession.close();
         return user;
     }
 
-    public  List<User> selectbyname(String name) throws IOException {
-        SqlSession sqlSession = getSqlSession();
+    public List<User> selectbyname(String name) throws IOException {
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         List<User> user = userMapper.selectByname(name);
         sqlSession.close();
         return user;
     }
-
 
 
 }

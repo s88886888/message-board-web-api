@@ -26,9 +26,6 @@ public class AddSevlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.setContentType("application/json; charset=utf-8");
-        resp.setCharacterEncoding("UTF-8");
-
 
         String articlename = req.getParameter("articlename");
         String text = req.getParameter("text");

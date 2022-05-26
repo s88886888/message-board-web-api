@@ -1,7 +1,6 @@
 package mapper;
 
 import model.Admin;
-import model.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -13,7 +12,7 @@ public interface AdminMapper {
 
     Admin selectByid(int id);
 
-    boolean addAdmin(@Param("name") String name,@Param("password") String password, @Param("time") Date time);
+    boolean addAdmin(@Param("name") String name, @Param("password") String password, @Param("time") Date time);
 
     boolean updateAdmin(@Param("id") int id, @Param("name") String name, @Param("password") String password);
 

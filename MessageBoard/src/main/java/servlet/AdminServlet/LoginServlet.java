@@ -3,8 +3,8 @@ package servlet.AdminServlet;
 import Pooltool.JsonReader;
 import Pooltool.Token;
 import dao.AdminDao;
-import model.ResultVo;
 import model.Admin;
+import model.ResultVo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +18,7 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req,resp);
+        doPost(req, resp);
     }
 
     @Override

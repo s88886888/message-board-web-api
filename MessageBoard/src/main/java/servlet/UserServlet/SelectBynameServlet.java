@@ -29,7 +29,11 @@ public class SelectBynameServlet extends HttpServlet {
         UserDao userDao = new UserDao();
         String name = req.getParameter("name");
 
-        List<User> user  = userDao.selectbyname(name);
+        if (name.equals("")) {
+            jsonReader.getJson(req, resp, resultVo.error("字段不可以为空"));
+        }
+
+        List<User> user = userDao.selectbyname(name);
         jsonReader.getJson(req, resp, resultVo.success(user));
     }
 }

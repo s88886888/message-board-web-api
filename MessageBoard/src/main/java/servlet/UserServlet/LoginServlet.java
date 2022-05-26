@@ -4,7 +4,6 @@ import Pooltool.JsonReader;
 import Pooltool.Token;
 import dao.UserDao;
 import model.ResultVo;
-import model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,14 +17,11 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        doPost(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
-        resp.setContentType("application/json; charset=utf-8");
-        resp.setCharacterEncoding("UTF-8");
 
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
@@ -37,21 +33,26 @@ public class LoginServlet extends HttpServlet {
 
         if (phone == "") {
             jsonReader.getJson(req, resp, resultVo.error("手机账号不能为空"));
+            return;
+
         } else if (password == "") {
             jsonReader.getJson(req, resp, resultVo.error("密码不能为空"));
+            return;
         }
-
         UserDao userDao = new UserDao();
         try {
             if (userDao.Login(phone, password) == null) {
                 jsonReader.getJson(req, resp, resultVo.error("登录失败"));
             } else {
-                User user = userDao.selectByphone(phone);
 
-                String token = Token.getToken(user.getPhone());
+//                登录成功后 根据手机号码颁发token
+//                            User user = userDao.selectByphone(phone);
+//                         String token = Token.getToken(user.getPhone());
+
+                String token = Token.getToken(phone);
                 resp.setHeader("token", token);
-
                 jsonReader.getJson(req, resp, resultVo.success("登录成功"));
+
             }
 
         } catch (Exception e) {

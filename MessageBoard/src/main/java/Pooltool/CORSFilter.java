@@ -40,25 +40,39 @@ public class CORSFilter extends HttpFilter {
 //        'Access-Control-Allow-Headers:x-requested-with,content-type'
 
 
+        //设置响应头和请求头可读 utf-8 数据格式
         response.setContentType("application/json; charset=utf-8");
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
 
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        //所有请求方式：|GET|POST|HEAD ......一般只能写三个
+        //设置可以与后端对接的地址如“127.0.0.1”  ，“*”所有
+        response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5501");
+
+        //设置允许前端可以请求方式：|GET|POST|HEAD ......一般只能写三个
         response.setHeader("Access-Control-Allow-Methods", "*");
 
+
+        //发出请求时报头用于预检请求让服务器知道哪些 HTTP 头的实际请求时将被使用。
         response.setHeader("Access-Control-Request-Headers", "*");
 
 
-        //服务器向客户端暴露的header字段，用于客户端获取response的头部信息，多个用逗号分隔。CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定。
+        //服务器向客户端暴露的header字段，用于客户端获取response的头部信息，多个用逗号分隔。CORS请求时，
+        // XMLHttpRequest对象的getResponseHeader()
+        // 方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。
+        // 如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定。
         response.setHeader("Access-Control-Expose-Headers", "*");
 
 
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,content-type,token");
+        //响应报头在响应用于一个预检请求指示哪个HTTP标头将通过提供Access-Control-Expose-Headers使实际的请求时。
+        response.setHeader("Access-Control-Allow-Headers", "*");
+
+        //运行自定义的请求头
         response.setHeader("Access-Control-Expose-Headers", "token");
-        System.out.println("拦截工作中");
+
+        //https://www.php.cn/manual/view/35593.html跨域手册
+
+        System.out.println("CORS拦截工作中");
 
         chain.doFilter(request, response);
     }

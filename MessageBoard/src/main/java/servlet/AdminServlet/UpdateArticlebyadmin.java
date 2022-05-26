@@ -4,8 +4,8 @@ import Pooltool.JsonReader;
 import Pooltool.Token;
 import dao.AdminDao;
 import dao.ArticleDao;
-import model.ResultVo;
 import model.Admin;
+import model.ResultVo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +26,6 @@ public class UpdateArticlebyadmin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
 
         String articlename = req.getParameter("articlename");
@@ -67,6 +66,6 @@ public class UpdateArticlebyadmin extends HttpServlet {
         } catch (Exception e) {
             jsonReader.getJson(req, resp, resultVo.error(e.getMessage()));
         }
-        
+
     }
 }

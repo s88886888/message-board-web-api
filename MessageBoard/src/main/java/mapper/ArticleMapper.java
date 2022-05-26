@@ -33,8 +33,4 @@ public interface ArticleMapper {
     boolean delectByid(@Param("id") int id);
 
 
-
-
-
-
 }

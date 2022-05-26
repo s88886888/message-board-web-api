@@ -4,6 +4,7 @@ import Pooltool.JsonReader;
 import Pooltool.Token;
 import dao.ArticleDao;
 import dao.UserDao;
+import model.Article;
 import model.ResultVo;
 import model.User;
 
@@ -47,6 +48,7 @@ public class UpdateServlet extends HttpServlet {
             jsonReader.getJson(req, resp, resultVo.error("图片不能为空"));
             return;
         }
+
         ArticleDao articleDao = new ArticleDao();
         UserDao userDao = new UserDao();
         Date time = new Date(new Date().getTime());
@@ -57,6 +59,15 @@ public class UpdateServlet extends HttpServlet {
             if (user == null) {
                 jsonReader.getJson(req, resp, resultVo.error("异常用户"));
                 return;
+            }
+            if (user != null) {
+                Article article = articleDao.selectByid(id);
+                if (article.authorid != user.id) {
+                    jsonReader.getJson(req, resp, resultVo.error("不是你的作品！没有权限"));
+                    return;
+                }
+
+
             }
             if (articleDao.UpdateArticle(id, articlename, text, img)) {
                 jsonReader.getJson(req, resp, resultVo.success("修改成功"));

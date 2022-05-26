@@ -29,44 +29,50 @@ public class deleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ResultVo resultVo = new ResultVo();
         JsonReader jsonReader = new JsonReader();
-        ArticleDao articleDao = new ArticleDao();
+
 
         int id = Integer.parseInt(req.getParameter("id"));
 
-         Article article = articleDao.selectByid(id);
 
         UserDao userDao = new UserDao();
         AdminDao adminDao = new AdminDao();
+        ArticleDao articleDao = new ArticleDao();
 
         String token = req.getHeader("token");
 
 
-
-
         try {
 
-            String   key = Token.verifyToken(token);
+            String key = Token.verifyToken(token);
+
             User user = userDao.selectByphone(key);
             Admin admin = adminDao.Selectbyname(key);
 
-            if (user == null||admin == null) {
-                jsonReader.getJson(req, resp, resultVo.error("异常用户"));
+
+            if (user == null && admin == null) {
+                jsonReader.getJson(req, resp, resultVo.error("异常请求，请重新登录"));
                 return;
             }
-            if (article==null)
-            {
+
+            Article article = articleDao.selectByid(id);
+            if (article == null) {
                 jsonReader.getJson(req, resp, resultVo.error("文章不存在"));
                 return;
             }
-            else
-            {
-                if ( articleDao.delect(id))
-                {
-                    jsonReader.getJson(req, resp, resultVo.error("删除成功"));
+            if (article == null) {
+                jsonReader.getJson(req, resp, resultVo.error("文章不存在"));
+                return;
+            }
+            if (user != null) {
+                if (article.authorid != user.id) {
+                    jsonReader.getJson(req, resp, resultVo.error("不是你的作品！没有权限"));
                     return;
                 }
-                else
-                {
+            } else {
+                if (articleDao.delect(id)) {
+                    jsonReader.getJson(req, resp, resultVo.success("删除成功"));
+                    return;
+                } else {
                     jsonReader.getJson(req, resp, resultVo.error("删除错误"));
                     return;
                 }

@@ -23,12 +23,10 @@ public class Selectbyname extends HttpServlet {
         ArticleDao articleDao = new ArticleDao();
 
         String name = req.getParameter("name");
-        if (name=="")
-        {
+        if (name == "") {
             jsonReader.getJson(req, resp, resultVo.success("没有这个作品"));
             return;
-        }
-        else {
+        } else {
             List<Article> articles = articleDao.selectLikeData(name);
 
             jsonReader.getJson(req, resp, resultVo.success(articles));

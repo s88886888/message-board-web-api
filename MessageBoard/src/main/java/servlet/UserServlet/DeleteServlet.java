@@ -1,9 +1,7 @@
 package servlet.UserServlet;
 
 import Pooltool.JsonReader;
-import dao.ArticleDao;
 import dao.UserDao;
-import model.Article;
 import model.ResultVo;
 import model.User;
 
@@ -29,27 +27,24 @@ public class DeleteServlet extends HttpServlet {
         UserDao userDao = new UserDao();
 
         int id = Integer.parseInt(req.getParameter("id"));
-
         User user = userDao.selectbyid(id);
 
-        if (user==null)
-        {
+
+        if (id == 0) {
+            jsonReader.getJson(req, resp, resultVo.error("id不能为空"));
+            return;
+        }
+        if (user == null) {
             jsonReader.getJson(req, resp, resultVo.error("用户不存在"));
             return;
         }
-        else
-        {
-            if (userDao.deletebyid(id))
-            {
-                jsonReader.getJson(req, resp, resultVo.error("删除成功"));
-                return;
-            }
-            else
-            {
-                jsonReader.getJson(req, resp, resultVo.error("删除错误"));
-                return;
-            }
+        if (userDao.deletebyid(id)) {
+            jsonReader.getJson(req, resp, resultVo.error("删除成功"));
+
+        } else {
+            jsonReader.getJson(req, resp, resultVo.error("删除错误"));
 
         }
+
     }
 }

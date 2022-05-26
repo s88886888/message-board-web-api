@@ -1,7 +1,10 @@
 package servlet.UserServlet;
 
 import Pooltool.JsonReader;
+import Pooltool.Token;
+import dao.AdminDao;
 import dao.UserDao;
+import model.Admin;
 import model.ResultVo;
 import model.User;
 
@@ -22,9 +25,24 @@ public class SelectallServlet extends HttpServlet {
 
         UserDao UserDao = new UserDao();
 
-        List<User> articles = UserDao.selectAll();
+        AdminDao adminDao = new AdminDao();
+
+        String token = req.getHeader("token");
 
 
-        jsonReader.getJson(req, resp, resultVo.success(articles));
+        try {
+            String name = Token.verifyToken(token);
+            Admin admin = adminDao.Selectbyname(name);
+
+            if (admin == null) {
+                jsonReader.getJson(req, resp, resultVo.error("token异常重新登录"));
+            } else {
+                List<User> user = UserDao.selectAll();
+                jsonReader.getJson(req, resp, resultVo.success(user));
+            }
+
+        } catch (Exception e) {
+            jsonReader.getJson(req, resp, resultVo.success(e.getMessage()));
+        }
     }
 }

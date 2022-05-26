@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 
 @WebServlet("/Selectbyid")
@@ -22,11 +21,12 @@ public class Selectbyid extends HttpServlet {
         JsonReader jsonReader = new JsonReader();
         ArticleDao articleDao = new ArticleDao();
         int id = Integer.parseInt(req.getParameter("id"));
-        if (id==0)
-        {
-            jsonReader.getJson(req, resp, resultVo.error("没有这个作品"));
+
+        if (id == 0) {
+            jsonReader.getJson(req, resp, resultVo.error("id不可以为空"));
             return;
         }
+
         Article articles = articleDao.selectByid(id);
         jsonReader.getJson(req, resp, resultVo.success(articles));
 
