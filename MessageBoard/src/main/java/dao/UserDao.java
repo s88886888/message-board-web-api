@@ -75,6 +75,17 @@ public class UserDao {
         return returnData;
     }
 
+
+    public boolean updateUserimg(String phone, String img) throws IOException {
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        UserMapper brandMapper = sqlSession.getMapper(UserMapper.class);
+        boolean returnData = brandMapper.updateUserimg(phone,img);
+        //向数据库提交数据
+        sqlSession.commit();
+        sqlSession.close();
+        return returnData;
+    }
+
     public boolean AddbUser(String name, String phone, String password, String email) throws IOException {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -84,14 +95,6 @@ public class UserDao {
         sqlSession.close();
         System.out.println(returnData + "又注册一个");
         return returnData;
-    }
-
-    public List<User> selectLikeData(String name, String phone) throws IOException {
-        SqlSession sqlSession = MyBatisUtils.getSqlSession();
-        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        List<User> user = (List<User>) userMapper.SelectUsernamOrphone(name, phone);
-        sqlSession.close();
-        return user;
     }
 
     public User selectByphone(String phone) throws IOException {

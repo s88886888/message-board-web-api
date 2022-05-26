@@ -8,7 +8,7 @@
 
     <insert id="addAdmin">
 
-        insert into Admin(name,password,`time`)value (#{name},#{password},#{time})
+        insert into Admin(name, password, `time`) value (#{name},#{password},#{time})
 
 
     </insert>
@@ -35,10 +35,12 @@
     </select>
     <select id="Login" resultType="model.Admin">
 
-select  *from admin  <where> name=#{name} and password=#{password}</where>
+        select *from admin
+        <where>name=#{name} and password=#{password}</where>
     </select>
     <select id="selectbyname" resultType="model.Admin">
-        select * from Admin <where> name=#{name}</where>
+        select * from Admin
+        <where>name=#{name}</where>
     </select>
 
 

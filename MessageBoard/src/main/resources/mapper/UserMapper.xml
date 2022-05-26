@@ -27,6 +27,11 @@
         <where>id=#{id}</where>
 
     </update>
+    <update id="updateUserimg">
+        update user set
+        img =#{img}
+        <where>phone=#{phone}</where>
+    </update>
 
     <delete id="deletebyid">
         delete from user

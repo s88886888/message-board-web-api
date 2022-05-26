@@ -44,12 +44,9 @@ public class UpdateServlet extends HttpServlet {
             return;
         }
 
-        User phoneuser = userDao.selectByphone(Phone);
 
-        if (phoneuser != null) {
-            jsonReader.getJson(req, resp, resultVo.error("电话已经存在了"));
-            return;
-        } else if (Email.equals("")) {
+
+        if (Email.equals("")) {
             jsonReader.getJson(req, resp, resultVo.error("Email不能为空"));
             return;
         } else if (Name.equals("")) {

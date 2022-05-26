@@ -31,11 +31,11 @@ public class LoginServlet extends HttpServlet {
         JsonReader jsonReader = new JsonReader();
 
 
-        if (phone == "") {
+        if (phone.equals("")) {
             jsonReader.getJson(req, resp, resultVo.error("手机账号不能为空"));
             return;
 
-        } else if (password == "") {
+        } else if (password.equals("")) {
             jsonReader.getJson(req, resp, resultVo.error("密码不能为空"));
             return;
         }

@@ -8,6 +8,8 @@ public class User {
     public String Name;
     public String PassWord;
 
+    public  String img;
+
     @Override
     public String toString() {
         return "User{" +
@@ -16,7 +18,16 @@ public class User {
                 ", Email='" + Email + '\'' +
                 ", Name='" + Name + '\'' +
                 ", PassWord='" + PassWord + '\'' +
+                ", img='" + img + '\'' +
                 '}';
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public int getId() {

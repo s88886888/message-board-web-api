@@ -26,5 +26,6 @@ public interface UserMapper {
 
     List<User> selectByname(String name);
 
+    boolean updateUserimg(@Param("phone") String phone, @Param("img") String img);
 
 }

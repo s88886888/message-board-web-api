@@ -55,7 +55,7 @@ public class Token {
         JWTCreator.Builder token = JWT.create()//创建token
                 .withIssuer("com.ttc")//指定签发人
                 .withSubject(subject)//指定主体数据
-                .withExpiresAt(new Date(new Date().getTime() + (100000 * 20)));
+                .withExpiresAt(new Date(new Date().getTime() + (600000 * 20)));
         //添加负载数据
         for (String key : payload.keySet()) {
             token.withClaim(key, payload.get(key));
