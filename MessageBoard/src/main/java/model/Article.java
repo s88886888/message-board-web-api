@@ -13,12 +13,10 @@ public class Article {
     public String Image;
     public int likecount;
 
-    public String getImage() {
-        return Image;
-    }
+    public String img;
 
-    public void setImage(String Image) {
-        this.Image = Image;
+    public String getImg() {
+        return img;
     }
 
     @Override
@@ -30,9 +28,22 @@ public class Article {
                 ", author='" + author + '\'' +
                 ", authorid=" + authorid +
                 ", text='" + text + '\'' +
-                ", Image=" + Image +
+                ", Image='" + Image + '\'' +
                 ", likecount=" + likecount +
+                ", img='" + img + '\'' +
                 '}';
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String Image) {
+        this.Image = Image;
     }
 
     public int getId() {

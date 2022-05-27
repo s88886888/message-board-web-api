@@ -63,7 +63,7 @@ public class ArticleDao {
     public List<Article> selectLikeData(String articlename) throws IOException {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         ArticleMapper ArticleMapper = sqlSession.getMapper(ArticleMapper.class);
-        List<Article> Article = (List<model.Article>) ArticleMapper.selectarticlename(articlename);
+        List<Article> Article = ArticleMapper.selectarticlename(articlename);
         sqlSession.close();
         return Article;
     }
