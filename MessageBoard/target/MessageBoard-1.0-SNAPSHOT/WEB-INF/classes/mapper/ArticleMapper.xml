@@ -54,9 +54,10 @@
         <where>id=#{id}</where>
     </select>
     <select id="selectarticlename" resultType="model.Article">
-        select * FROM article
+        select a.*,b.img
+        from article  a  join  user  b on a.authorid=b.id
         <where>
-            articlename like "%" #{articlename} "%";
+            a.articlename like "%" #{articlename} "%";
         </where>
     </select>
     <select id="Selectarticlebyauthor" resultType="model.Article">
