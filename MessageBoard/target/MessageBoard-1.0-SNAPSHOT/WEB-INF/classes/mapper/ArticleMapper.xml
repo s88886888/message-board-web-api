@@ -46,8 +46,8 @@
         <where>id=#{id}</where>
     </delete>
     <select id="selectALL" resultType="model.Article">
-        select *
-        from article
+        select a.*,b.img
+        from article  a  join  user  b on a.authorid=b.id
     </select>
     <select id="selectByid" resultType="model.Article">
         select * from article
@@ -60,7 +60,8 @@
         </where>
     </select>
     <select id="Selectarticlebyauthor" resultType="model.Article">
-        select * from article
-        <where>author=#{author}</where>
+        select a.*,b.img
+        from article  a  join  user  b on a.authorid=b.id
+        <where>a.author=#{author}</where>
     </select>
 </mapper>
