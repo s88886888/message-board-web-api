@@ -47,7 +47,7 @@ public class CORSFilter extends HttpFilter {
 
 
         //设置可以与后端对接的地址如“127.0.0.1”  ，“*”所有
-        response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5501");
+        response.setHeader("Access-Control-Allow-Origin", "*");
 
         //设置允许前端可以请求方式：|GET|POST|HEAD ......一般只能写三个
         response.setHeader("Access-Control-Allow-Methods", "*");
