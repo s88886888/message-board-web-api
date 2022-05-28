@@ -63,6 +63,6 @@
     <select id="Selectarticlebyauthor" resultType="model.Article">
         select a.*,b.img
         from article  a  join  user  b on a.authorid=b.id
-        <where>a.author=#{author}</where>
+        <where>a.authorid=#{authorid}</where>
     </select>
 </mapper>
