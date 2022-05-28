@@ -76,10 +76,10 @@ public class ArticleDao {
         return Article;
     }
 
-    public List<Article> selectByauthor(String author) throws IOException {
+    public List<Article> selectByauthor(int authorid) throws IOException {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         ArticleMapper ArticleMapper = sqlSession.getMapper(ArticleMapper.class);
-        List<Article> Article = ArticleMapper.Selectarticlebyauthor(author);
+        List<Article> Article = ArticleMapper.Selectarticlebyauthor(authorid);
         sqlSession.close();
         return Article;
     }

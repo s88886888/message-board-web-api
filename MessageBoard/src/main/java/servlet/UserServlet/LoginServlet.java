@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
         UserDao userDao = new UserDao();
         try {
             if (userDao.Login(phone, password) == null) {
-                jsonReader.getJson(req, resp, resultVo.error("登录失败"));
+                jsonReader.getJson(req, resp, resultVo.error("登录失败:请检查输入"));
             } else {
 
 //                登录成功后 根据手机号码颁发token

@@ -37,7 +37,7 @@ public class SelecListServlet extends HttpServlet {
                 jsonReader.getJson(req, resp, resultVo.error("异常用户"));
                 return;
             }
-            List<Article> articles = articleDao.selectByauthor(user.Name);
+            List<Article> articles = articleDao.selectByauthor(user.id);
             jsonReader.getJson(req, resp, resultVo.success(articles));
         } catch (Exception e) {
             jsonReader.getJson(req, resp, resultVo.error(e.getMessage()));

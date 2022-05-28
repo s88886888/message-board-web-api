@@ -22,6 +22,7 @@ public class Token {
         data.put("user", user);
         data.put("isAdmin", "true");
         String token = getJWTWithHMAC256("login", data, secretKey);
+        System.out.println("成功颁发token:"+user);
         return token;
     }
 

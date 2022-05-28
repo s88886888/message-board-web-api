@@ -24,7 +24,7 @@ public interface ArticleMapper {
     Article selectByid(int id);
 
 
-    List<Article> Selectarticlebyauthor(String author);
+    List<Article> Selectarticlebyauthor(int authorid);
 
     List<Article> selectarticlename(String articlename);
 
