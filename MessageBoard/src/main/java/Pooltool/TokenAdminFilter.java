@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(filterName = "AdminTokenFilter", urlPatterns = {"/selectuserbyname", "/SelectUser", "/selectuserbyid", "/updateServletbyadmin"})
+@WebFilter(filterName = "AdminTokenFilter", urlPatterns = {"/selectuserbyname", "/SelectUser", "/selectuserbyid", "/updateServletbyadmin","/deletearticle","/deleteuser"})
 public class TokenAdminFilter extends HttpFilter {
 
     @Override
