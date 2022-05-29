@@ -59,25 +59,21 @@ public class deleteServlet extends HttpServlet {
                 jsonReader.getJson(req, resp, resultVo.error("文章不存在"));
                 return;
             }
-            if (article == null) {
-                jsonReader.getJson(req, resp, resultVo.error("文章不存在"));
-                return;
-            }
             if (user != null) {
                 if (article.authorid != user.id) {
                     jsonReader.getJson(req, resp, resultVo.error("不是你的作品！没有权限"));
-                    return;
-                }
-            } else {
-                if (articleDao.delect(id)) {
-                    jsonReader.getJson(req, resp, resultVo.success("删除成功"));
-                    return;
-                } else {
-                    jsonReader.getJson(req, resp, resultVo.error("删除错误"));
-                    return;
-                }
-            }
 
+                    return;
+                }else{
+                    if (articleDao.delect(id)) {
+                        jsonReader.getJson(req, resp, resultVo.success("删除成功"));
+                    } else {
+                        jsonReader.getJson(req, resp, resultVo.error("删除错误"));
+                    }
+                    return;
+                }
+
+            }
         } catch (Exception e) {
             jsonReader.getJson(req, resp, resultVo.error("未知错误"));
             return;
