@@ -25,12 +25,8 @@ public class LoginServlet extends HttpServlet {
 
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
-
-
         ResultVo resultVo = new ResultVo();
         JsonReader jsonReader = new JsonReader();
-
-
         if (phone.equals("")) {
             jsonReader.getJson(req, resp, resultVo.error("手机账号不能为空"));
             return;
