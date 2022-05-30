@@ -13,24 +13,24 @@
 
     </insert>
     <update id="updateAdmin">
-        update Admin
+        update admin
         set name=#{name},
         password=#{text}
         <where>id=#{id}</where>
 
     </update>
     <delete id="deletebyid">
-        delete from Admin
+        delete from admin
         <where>id=#{id}</where>
     </delete>
 
     <select id="selectALL" resultType="model.Admin">
         select *
-        from Admin
+        from admin
     </select>
 
     <select id="selectByid" resultType="model.Admin">
-        select * from Admin
+        select * from admin
         <where>id=#{id}</where>
     </select>
     <select id="Login" resultType="model.Admin">
@@ -39,7 +39,7 @@
         <where>name=#{name} and password=#{password}</where>
     </select>
     <select id="selectbyname" resultType="model.Admin">
-        select * from Admin
+        select * from admin
         <where>name=#{name}</where>
     </select>
 

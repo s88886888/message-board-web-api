@@ -62,9 +62,9 @@ public class deleteServlet extends HttpServlet {
             if (user != null) {
                 if (article.authorid != user.id) {
                     jsonReader.getJson(req, resp, resultVo.error("不是你的作品！没有权限"));
-
                     return;
-                }else{
+                }
+                else{
                     if (articleDao.delect(id)) {
                         jsonReader.getJson(req, resp, resultVo.success("删除成功"));
                     } else {
@@ -73,6 +73,14 @@ public class deleteServlet extends HttpServlet {
                     return;
                 }
 
+            }
+            else{
+                if (articleDao.delect(id)) {
+                    jsonReader.getJson(req, resp, resultVo.success("删除成功"));
+                } else {
+                    jsonReader.getJson(req, resp, resultVo.error("删除错误"));
+                }
+                return;
             }
         } catch (Exception e) {
             jsonReader.getJson(req, resp, resultVo.error("未知错误"));
